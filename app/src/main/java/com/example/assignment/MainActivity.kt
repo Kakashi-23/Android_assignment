@@ -3,10 +3,14 @@ package com.example.assignment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assignment.databinding.ActivityMainBinding
@@ -17,11 +21,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
-    private val TAG = "MainActivity"
-    private val baseURL="https://api.github.com/"
     var itemList= arrayListOf<LanguageData.Items>()
     private lateinit var recyclerAdapter: LanguageAdapter
     private lateinit var recyclerlayout:RecyclerView.LayoutManager
+    lateinit var progressBar: ProgressBar
     lateinit var mainRecycler:RecyclerView
     lateinit var mainSearch:SearchView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,15 +33,34 @@ class MainActivity : AppCompatActivity() {
    //     val mainActivityDataBinding: com.example.assignment.databinding.ActivityMainBinding   = DataBindingUtil.setContentView(this,R.layout.activity_main)
         mainSearch=findViewById(R.id.mainSearch)
         mainRecycler=findViewById(R.id.mainRecycler)
-        getRepoData("language:python")
+        progressBar=findViewById(R.id.mainProgress)
+        mainSearch.setOnQueryTextListener(object : OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                val query = "language:"+ p0!!
+                progressBar.visibility=View.VISIBLE
+                getRepoData(query)
+                return false
+            }
 
+            override fun onQueryTextChange(p0: String?): Boolean {
+               return false
+            }
 
+        })
+        if(Constants.objects.isEdited){
+            recyclerlayout = LinearLayoutManager(this@MainActivity)
+            recyclerAdapter = LanguageAdapter(this@MainActivity, Constants.objects.list)
+            mainRecycler.layoutManager = recyclerlayout
+            mainRecycler.adapter = recyclerAdapter
+        }/*else {
+            getRepoData("language:python")
+        }*/
 
 
     }
-    fun getRepoData(q:String){
+    private fun getRepoData(q:String){
         val retrofit= Retrofit.Builder()
-            .baseUrl(baseURL)
+            .baseUrl(Constants.objects.baseURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val api=retrofit.create(API::class.java)
@@ -50,14 +72,14 @@ class MainActivity : AppCompatActivity() {
                             .show()
                     return
                 }
+                progressBar.visibility=View.GONE
                 val data = response.body()
                 if (data != null) {
-                    /* for (i in data.items){
+                     for (i in data.items){
                    itemList.add(i)
-                    }*/
-                    itemList = data.items
-            println("item list is"+itemList.size.toString())
-                    Toast.makeText(this@MainActivity,itemList.size.toString(),Toast.LENGTH_LONG).show()
+                    }
+        //            itemList = data.items
+                    Constants.objects.list=itemList
                     recyclerlayout = LinearLayoutManager(this@MainActivity)
                     recyclerAdapter = LanguageAdapter(this@MainActivity, itemList)
                     mainRecycler.layoutManager = recyclerlayout
@@ -72,4 +94,5 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
 }

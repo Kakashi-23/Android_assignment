@@ -9,6 +9,7 @@ data class LanguageData(
     @SerializedName("items") var items:ArrayList<Items>
 ) {
     data class Items(
+            @SerializedName("id") var id:String,
             @SerializedName("full_name") var fullName:String,
             @SerializedName("owner") var owner:OwnerLogin,
             @SerializedName("description") var description:String,
