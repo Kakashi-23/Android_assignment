@@ -1,5 +1,6 @@
-package com.example.assignment
+package com.example.assignment.Interfaces
 
+import com.example.assignment.Models.LanguageData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

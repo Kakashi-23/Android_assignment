@@ -1,4 +1,4 @@
-package com.example.assignment
+package com.example.assignment.Models
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,7 +11,7 @@ data class LanguageData(
     data class Items(
             @SerializedName("id") var id:String,
             @SerializedName("full_name") var fullName:String,
-            @SerializedName("owner") var owner:OwnerLogin,
+            @SerializedName("owner") var owner: OwnerLogin,
             @SerializedName("description") var description:String,
     )
     data class OwnerLogin(

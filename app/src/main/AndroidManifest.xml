@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
-        <activity android:name=".RepoInformation"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.RepoInformation"></activity>
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

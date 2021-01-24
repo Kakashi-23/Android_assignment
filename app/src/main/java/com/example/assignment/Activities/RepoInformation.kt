@@ -1,15 +1,16 @@
-package com.example.assignment
+package com.example.assignment.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.assignment.R
+import com.example.assignment.Utils.Constants
 import com.example.assignment.databinding.ActivityRepoInformationBinding
 
 class RepoInformation : AppCompatActivity() {
     lateinit var repoInformationDataBiding:ActivityRepoInformationBinding
-    private val list=Constants.objects.list
+    private val list= Constants.objects.list
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
    //     setContentView(R.layout.activity_repo_information)

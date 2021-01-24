@@ -1,17 +1,17 @@
-package com.example.assignment
+package com.example.assignment.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.assignment.Activities.RepoInformation
+import com.example.assignment.Models.LanguageData
+import com.example.assignment.R
+import com.example.assignment.Utils.Constants
 
 class LanguageAdapter(val context:Context, val list: ArrayList<LanguageData.Items>): RecyclerView.Adapter<LanguageAdapter.ViewHolder>() {
 
@@ -40,7 +40,7 @@ class LanguageAdapter(val context:Context, val list: ArrayList<LanguageData.Item
         holder.owner.text=item.owner.login
         holder.description.text=item.description
         holder.layout.setOnClickListener{
-            val intent= Intent(context,RepoInformation::class.java)
+            val intent= Intent(context, RepoInformation::class.java)
             intent.putExtra("position",position)
             context.startActivity(intent)
         }

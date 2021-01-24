@@ -1,4 +1,6 @@
-package com.example.assignment
+package com.example.assignment.Utils
+
+import com.example.assignment.Models.LanguageData
 
 class Constants {
     object objects {

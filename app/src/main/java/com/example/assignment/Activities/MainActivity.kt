@@ -1,19 +1,19 @@
-package com.example.assignment
+package com.example.assignment.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.assignment.databinding.ActivityMainBinding
+import com.example.assignment.Interfaces.API
+import com.example.assignment.Adapter.LanguageAdapter
+import com.example.assignment.Models.LanguageData
+import com.example.assignment.R
+import com.example.assignment.Utils.Constants
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
